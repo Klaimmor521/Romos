@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:romos/actors.dart';
 
 class Level extends World
 {
@@ -13,6 +14,7 @@ class Level extends World
     //Debug for vector
     //level.debugMode = true; 
     add(level);
+    add(Player(character: 'Ghost'));
 
     return super.onLoad();
   }

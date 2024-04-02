@@ -18,11 +18,12 @@ class Romos extends FlameGame
   Future<void> onLoad() async
   {
     await images.loadAllImages();
-    camera = CameraComponent.withFixedResolution(world: world, width: 25600, height: 19200);
+    camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.topLeft;
 
     add(camera);
     add(world);
+    
     return super.onLoad();
   }
 
