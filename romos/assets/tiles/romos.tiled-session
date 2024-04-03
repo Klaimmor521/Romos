@@ -3,17 +3,17 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "Level-1.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "Level-1.tmx": {
             "scale": 0.33,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1471.2121212121212,
-                "y": 486.36363636363626
+                "x": 1016.6666666666666,
+                "y": 731.8181818181818
             }
         },
         "Level-2.tmx": {
@@ -74,6 +74,7 @@
     "map.width": 40,
     "mapScene.enableWorlds": false,
     "openFiles": [
+        "Level-1.tmx"
     ],
     "project": "romos.tiled-project",
     "recentFiles": [

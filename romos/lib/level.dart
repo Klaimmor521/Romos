@@ -14,7 +14,19 @@ class Level extends World
     //Debug for vector
     //level.debugMode = true; 
     add(level);
-    add(Player(character: 'Ghost'));
+
+    final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoint');
+    for(final spawnPoint in spawnPointsLayer!.objects)
+    {
+      switch (spawnPoint.class_)
+      {
+        case 'Player':
+          final player = Player(character: 'Ghost', position: Vector2(spawnPoint.x, spawnPoint.y));
+          add(player);
+          break;
+        default:
+      }
+    }
 
     return super.onLoad();
   }

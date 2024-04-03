@@ -10,7 +10,7 @@ enum PlayerStates
 class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
 {
   String character;
-  Player({required this.character});
+  Player({position, required this.character}) : super(position: position);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation upAnimation;
@@ -26,16 +26,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
   
   void _loadAllAnimations() 
   {
-    idleAnimation = SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/Ghost/Ghost idle.png'), 
-    SpriteAnimationData.sequenced
-      (
-        amount: 5, 
-        stepTime: stepTime, 
-        textureSize: Vector2.all(64)
-      )
-    );
-
-    upAnimation = _spriteAnimation();
+    idleAnimation = _spriteAnimation('Ghost idle', 5);
+    upAnimation = _spriteAnimation('Ghost walk up', 5);
     
     //List of all animations
     animations = 
@@ -47,12 +39,12 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
     current = PlayerStates.idle;
   }
 
-  SpriteAnimation _spriteAnimation()
+  SpriteAnimation _spriteAnimation(String state, int amount)
   {
-    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/$character/Ghost walk up.png'), 
+    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/$character/$state.png'), 
     SpriteAnimationData.sequenced
       (
-        amount: 5, 
+        amount: amount, 
         stepTime: stepTime, 
         textureSize: Vector2.all(64)
       )
