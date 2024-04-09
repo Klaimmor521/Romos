@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flame/components.dart';
+import 'package:flutter/services.dart';
 import 'package:romos/romos.dart';
 
 enum PlayerStates
@@ -12,10 +13,10 @@ enum PlayerDirection
   left, right, up, down, none
 }
 
-class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
+class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler
 {
   String character;
-  Player({position, required this.character}) : super(position: position);
+  Player({position, this.character = 'Ghost'}) : super(position: position);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation upAnimation;
@@ -41,6 +42,38 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
   {
     _updatePlayerMovement(dt);
     super.update(dt);
+  }
+
+  @override
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) 
+  {
+    final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA) || keysPressed.contains(LogicalKeyboardKey.arrowLeft);
+    final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD) || keysPressed.contains(LogicalKeyboardKey.arrowRight);
+    final isDownKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyS) || keysPressed.contains(LogicalKeyboardKey.arrowDown);
+    final isUpKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyW) || keysPressed.contains(LogicalKeyboardKey.arrowUp);
+
+    if(isLeftKeyPressed && isRightKeyPressed)
+    {
+      playerDirection = PlayerDirection.none;
+    }
+    else if(isLeftKeyPressed)
+    {
+      playerDirection = PlayerDirection.left;
+    }
+    else if(isRightKeyPressed)
+    {
+      playerDirection = PlayerDirection.right;
+    }
+    else if(isDownKeyPressed)
+    {
+      playerDirection = PlayerDirection.down;
+    }
+    else if(isUpKeyPressed)
+    {
+      playerDirection = PlayerDirection.up;
+    }
+
+    return super.onKeyEvent(event, keysPressed);
   }
   
   void _loadAllAnimations() 
@@ -80,7 +113,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>
   {
     double directionX = 0.0;
     double directionY = 0.0;
-    switch (playerDirection) 
+    switch (playerDirection)
     {
       case PlayerDirection.left:
         current = PlayerStates.left;

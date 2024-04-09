@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:romos/romos.dart';
 
-void main()
+void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
-  Flame.device.fullScreen();
-  Flame.device.setLandscape();
+  await Flame.device.fullScreen();
+  await Flame.device.setLandscape();
 
   Romos game = Romos();
   runApp(GameWidget(game: kDebugMode ? Romos() : game));

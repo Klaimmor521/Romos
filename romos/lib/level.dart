@@ -6,7 +6,8 @@ import 'package:romos/actors.dart';
 class Level extends World
 {
   final String levelName;
-  Level({required this.levelName});
+  final Player player;
+  Level({required this.levelName, required this.player});
   late TiledComponent level;
 
   @override
@@ -18,18 +19,17 @@ class Level extends World
     add(level);
 
     final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoint');
-    for(final spawnPoint in spawnPointsLayer!.objects)
+    for (final spawnPoint in spawnPointsLayer!.objects)
     {
       switch (spawnPoint.class_)
       {
         case 'Player':
-          final player = Player(character: 'Ghost', position: Vector2(spawnPoint.x, spawnPoint.y));
+          player.position = Vector2(spawnPoint.x, spawnPoint.y);
           add(player);
           break;
         default:
       }
     }
-
     return super.onLoad();
   }
 }

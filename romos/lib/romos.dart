@@ -1,23 +1,29 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:romos/actors.dart';
 import 'package:romos/level.dart';
 import 'package:flutter/widgets.dart';
 
-class Romos extends FlameGame
+class Romos extends FlameGame with HasKeyboardHandlerComponents
 {
   @override
   Color backgroundColor() => const Color.fromARGB(255, 36, 36, 36);
   @override
   late final CameraComponent camera = CameraComponent();
+  Player player = Player(character: 'Ghost');
   @override
-  final world = Level(levelName: 'Level-2');
+  
 
   @override
   Future<void> onLoad() async
   {
     await images.loadAllImages();
+
+    final world = Level(levelName: 'Level-2', player: player);
+
     camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.topLeft;
 
