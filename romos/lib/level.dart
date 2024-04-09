@@ -5,12 +5,14 @@ import 'package:romos/actors.dart';
 
 class Level extends World
 {
+  final String levelName;
+  Level({required this.levelName});
   late TiledComponent level;
 
   @override
   Future<void> onLoad() async
   {
-    final level = await TiledComponent.load('Level-1.tmx', Vector2.all(64));
+    final level = await TiledComponent.load('$levelName.tmx', Vector2.all(64));
     //Debug for vector
     //level.debugMode = true; 
     add(level);

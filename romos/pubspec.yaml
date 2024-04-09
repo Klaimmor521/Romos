@@ -64,8 +64,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/images/Tileset for Earth.png
+      - assets/images/Tileset for Mars.png
       - assets/tiles/Level-1.tmx
+      - assets/tiles/Level-2.tmx
       - assets/tiles/Main tileset.tsx
+      - assets/tiles/Mars Tileset.tsx
       - assets/images/Characters/Animations/Ghost/
       - assets/images/Characters/Animations/Earth keeper/
       - assets/images/Characters/Animations/Mars keeper/

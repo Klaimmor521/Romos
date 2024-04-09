@@ -12,7 +12,7 @@ class Romos extends FlameGame
   @override
   late final CameraComponent camera = CameraComponent();
   @override
-  final world = Level();
+  final world = Level(levelName: 'Level-2');
 
   @override
   Future<void> onLoad() async
