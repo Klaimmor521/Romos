@@ -21,29 +21,31 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   {
     await images.loadAllImages();
 
-    final world = Level(levelName: 'Level-2', player: player);
+    final world = Level(levelName: 'Level-1', player: player);
 
-    camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
+    final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.topLeft;
 
-    add(camera);
-    add(world);
+    await add(camera);
+    await add(world);
     addButtons();
     
     return super.onLoad();
   }
   
+  
   void addButtons() 
   {
-    final buttonSize = Vector2(64, 64);
-    final buttonPadding = Vector2(10, 10);
+    final double buttonSize = 64;
+    final double buttonPadding = 20;
+    final Vector2 center = Vector2(size.x / 2, size.y - (buttonSize * 2 + buttonPadding * 2));
     
     //Button Up
     final buttonUp = SpriteButtonComponent(
-      priority: 10,
+      priority: 20,
       button: Sprite(images.fromCache('HUD/ButtonUp.png')),
-      position: Vector2(size.x / 2 - buttonSize.x / 2, size.y - buttonSize.y * 3),
-      size: buttonSize,
+      position: center + Vector2(0, -buttonSize - buttonPadding),
+      size: Vector2.all(buttonSize),
       onPressed: () 
       {
         player.playerDirection = PlayerDirection.up;
@@ -52,10 +54,10 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
 
     //Button Down
     final buttonDown = SpriteButtonComponent(
-      priority: 10,
+      priority: 20,
       button: Sprite(images.fromCache('HUD/ButtonDown.png')),
-      position: Vector2(size.x / 2 - buttonSize.x / 2, size.y - buttonSize.y),
-      size: buttonSize,
+      position: center + Vector2(0, buttonPadding),
+      size: Vector2.all(buttonSize),
       onPressed: () 
       {
         player.playerDirection = PlayerDirection.down;
@@ -64,22 +66,22 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
 
     //Button Left
     final buttonLeft = SpriteButtonComponent(
-      priority: 10,
+      priority: 20,
       button: Sprite(images.fromCache('HUD/ButtonLeft.png')),
-      position: Vector2(size.x / 2 - buttonSize.x - buttonPadding.x, size.y - buttonSize.y * 2),
-      size: buttonSize,
+      position: center + Vector2(-buttonSize - buttonPadding, 0),
+      size: Vector2.all(buttonSize),
       onPressed: () 
       {
-        player.playerDirection = PlayerDirection.right;
+        player.playerDirection = PlayerDirection.left;
       },
     );
 
     //Button Right
     final buttonRight = SpriteButtonComponent(
-      priority: 10,
+      priority: 20,
       button: Sprite(images.fromCache('HUD/ButtonRight.png')),
-      position: Vector2(size.x / 2 + buttonSize.x / 2 + buttonPadding.x, size.y - buttonSize.y * 2),
-      size: buttonSize,
+      position: center + Vector2(buttonSize + buttonPadding, 0),
+      size: Vector2.all(buttonSize),
       onPressed: () 
       {
         player.playerDirection = PlayerDirection.right;
@@ -91,6 +93,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
     add(buttonLeft);
     add(buttonRight);
   }
+  
 
   //Camera debug
   // @override
