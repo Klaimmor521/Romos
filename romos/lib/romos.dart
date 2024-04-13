@@ -21,14 +21,16 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   {
     await images.loadAllImages();
 
-    final world = Level(levelName: 'Level-1', player: player);
+    final world = Level(levelName: 'Level-2', player: player);
 
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
-    camera.viewfinder.anchor = Anchor.topLeft;
+    camera.viewfinder.anchor = Anchor.center;
+    camera.follow(player);
 
     await add(camera);
     await add(world);
     addButtons();
+    
     
     return super.onLoad();
   }
@@ -36,13 +38,12 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   
   void addButtons() 
   {
-    final double buttonSize = 64;
-    final double buttonPadding = 20;
+    const double buttonSize = 64;
+    const double buttonPadding = 20;
     final Vector2 center = Vector2(size.x / 2, size.y - (buttonSize * 2 + buttonPadding * 2));
     
     //Button Up
     final buttonUp = SpriteButtonComponent(
-      priority: 20,
       button: Sprite(images.fromCache('HUD/ButtonUp.png')),
       position: center + Vector2(0, -buttonSize - buttonPadding),
       size: Vector2.all(buttonSize),
@@ -50,6 +51,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
       {
         player.playerDirection = PlayerDirection.up;
       },
+      priority: 20,
     );
 
     //Button Down
@@ -100,7 +102,6 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   // void render(Canvas canvas) 
   // {
   //   super.render(canvas); // Сначала рендерим все компоненты игры.
-
   //   //Теперь рендерим рамку вьюпорта для отладки.
   // final rectPaint = Paint()
   //   ..color = Color(0xFFFF00FF) //Ярко-розовый цвет.
