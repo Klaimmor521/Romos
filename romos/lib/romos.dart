@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:romos/actors.dart';
@@ -21,7 +20,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   {
     await images.loadAllImages();
 
-    final world = Level(levelName: 'Level-2', player: player);
+    final world = Level(levelName: 'Level-1', player: player);
 
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.center;
@@ -29,73 +28,19 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
 
     await add(camera);
     await add(world);
-    addButtons();
-    
+    showControls();
     
     return super.onLoad();
   }
-  
-  
-  void addButtons() 
+
+  void showControls() 
   {
-    const double buttonSize = 64;
-    const double buttonPadding = 20;
-    final Vector2 center = Vector2(size.x / 2, size.y - (buttonSize * 2 + buttonPadding * 2));
-    
-    //Button Up
-    final buttonUp = SpriteButtonComponent(
-      button: Sprite(images.fromCache('HUD/ButtonUp.png')),
-      position: center + Vector2(0, -buttonSize - buttonPadding),
-      size: Vector2.all(buttonSize),
-      onPressed: () 
-      {
-        player.playerDirection = PlayerDirection.up;
-      },
-      priority: 20,
-    );
-
-    //Button Down
-    final buttonDown = SpriteButtonComponent(
-      priority: 20,
-      button: Sprite(images.fromCache('HUD/ButtonDown.png')),
-      position: center + Vector2(0, buttonPadding),
-      size: Vector2.all(buttonSize),
-      onPressed: () 
-      {
-        player.playerDirection = PlayerDirection.down;
-      },
-    );
-
-    //Button Left
-    final buttonLeft = SpriteButtonComponent(
-      priority: 20,
-      button: Sprite(images.fromCache('HUD/ButtonLeft.png')),
-      position: center + Vector2(-buttonSize - buttonPadding, 0),
-      size: Vector2.all(buttonSize),
-      onPressed: () 
-      {
-        player.playerDirection = PlayerDirection.left;
-      },
-    );
-
-    //Button Right
-    final buttonRight = SpriteButtonComponent(
-      priority: 20,
-      button: Sprite(images.fromCache('HUD/ButtonRight.png')),
-      position: center + Vector2(buttonSize + buttonPadding, 0),
-      size: Vector2.all(buttonSize),
-      onPressed: () 
-      {
-        player.playerDirection = PlayerDirection.right;
-      },
-    );
-
-    add(buttonUp);
-    add(buttonDown);
-    add(buttonLeft);
-    add(buttonRight);
+    overlays.add('controls');
   }
-  
+  void hideControls() 
+  {
+    overlays.remove('controls');
+  }
 
   //Camera debug
   // @override
