@@ -25,6 +25,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.center;
     camera.follow(player);
+    camera.viewfinder.zoom = 2.5;
 
     await add(camera);
     await add(world);
