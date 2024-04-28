@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Level-2.tmx",
+    "activeFile": "Level-1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -12,11 +12,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 0.25,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1334.848484848485,
-                "y": 887.878787878788
+                "x": 1930,
+                "y": 848
             }
         },
         "Level-2.tmx": {
@@ -84,15 +84,14 @@
     "map.width": 40,
     "mapScene.enableWorlds": false,
     "openFiles": [
-        "Mars Tileset.tsx",
         "Level-2.tmx",
         "Level-1.tmx"
     ],
     "project": "romos.tiled-project",
     "recentFiles": [
-        "Mars Tileset.tsx",
-        "Level-1.tmx",
         "Level-2.tmx",
+        "Level-1.tmx",
+        "Mars Tileset.tsx",
         "Main tileset.tsx",
         "walls.tsx",
         "grass.tsx",
