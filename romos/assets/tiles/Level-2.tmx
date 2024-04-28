@@ -36,7 +36,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="Spawnpoint" offsetx="-0.181818" offsety="1.81818">
-  <object id="5" name="Player" type="Player" x="186.404" y="253.51" width="63.9608" height="63.9744"/>
+  <object id="5" name="Player" type="Player" x="1216.53" y="1022.42" width="63.9608" height="63.9744"/>
  </objectgroup>
  <layer id="1" name="Walls" width="40" height="30">
   <data encoding="csv">

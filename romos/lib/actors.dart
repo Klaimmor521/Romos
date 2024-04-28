@@ -1,7 +1,12 @@
 import 'dart:async';
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:romos/player_hitbox.dart';
 import 'package:romos/romos.dart';
+import 'package:romos/collision_block.dart';
+import 'package:romos/utils.dart';
+import 'package:romos/player_hitbox.dart';
 
 enum PlayerStates
 {
@@ -28,11 +33,18 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   PlayerDirection playerDirection = PlayerDirection.down;
   double moveSpeed = 250;
   Vector2 velocity = Vector2.zero();
+  List<CollisionBlock> collisionBlocks = [];
+  PlayerHitBox hitbox = PlayerHitBox(offsetX: 10, offsetY: 4, width: 10, height: 10);
 
   @override
   FutureOr<void> onLoad()
   {
     _loadAllAnimations();
+    debugMode = true;
+    add(RectangleHitbox(
+      position: Vector2(hitbox.offsetX, hitbox.offsetY),
+      size: Vector2(hitbox.width, hitbox.height),
+    ));
     scale = Vector2.all(1.5); //Sprite scale
     return super.onLoad();
   }
@@ -41,6 +53,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   void update(double dt) 
   {
     _updatePlayerMovement(dt);
+    _checkHorizontalCollisions();
+    _checkVerticalCollisions();
     super.update(dt);
   }
 
@@ -137,5 +151,57 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     }
     velocity = Vector2(directionX, directionY);
     position += velocity * dt;
+  }
+  
+  //NEED TO FIX THIS BUG!!!
+  void _checkHorizontalCollisions() 
+  {
+    for(final block in collisionBlocks)
+    {
+      if(block.isWalls)
+      {
+        if(checkCollision(this, block))
+        {
+          if(velocity.x > 0.0)
+          {
+            velocity.x = 0.0;
+            position.x = block.x - hitbox.offsetX - hitbox.width;
+            break;
+          }
+          if(velocity.x < 0.0)
+          {
+            velocity.x = 0.0;
+            position.x = block.x + width;
+            break;
+          }
+        }
+      }
+    }
+  }
+  
+  //NEED TO FIX THIS BUG!!! The player is teleporting >:)
+  void _checkVerticalCollisions() 
+  {
+    for(final block in collisionBlocks)
+    {
+      if(block.isWalls)
+      {
+        if(checkCollision(this, block))
+        {
+          if(velocity.y > 0.0)
+          {
+            velocity.y = 0.0;
+            position.y = block.y - height;
+            break;
+          }
+          if(velocity.y < 0.0)
+          {
+            velocity.y = 0.0;
+            position.y = block.y + block.height;
+            break;
+          }
+        }
+      }
+    }
   }
 }

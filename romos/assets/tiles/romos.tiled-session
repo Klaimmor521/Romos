@@ -15,19 +15,19 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1004.5454545454547,
-                "y": 1045.4545454545455
+                "x": 1334.848484848485,
+                "y": 887.878787878788
             }
         },
         "Level-2.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1446.969696969697,
-                "y": 1084.848484848485
+                "x": 1566,
+                "y": 548
             }
         },
         "Main tileset.tsx": {
