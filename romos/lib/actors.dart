@@ -156,50 +156,39 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   //NEED TO FIX THIS BUG!!!
   void _checkHorizontalCollisions() 
   {
-    for(final block in collisionBlocks)
+    for (final block in collisionBlocks) 
     {
-      if(block.isWalls)
+      if (block.isWalls && checkCollision(this, block)) 
       {
-        if(checkCollision(this, block))
-        {
-          if(velocity.x > 0.0)
-          {
-            velocity.x = 0.0;
-            position.x = block.x - hitbox.offsetX - hitbox.width;
-            break;
-          }
-          if(velocity.x < 0.0)
-          {
-            velocity.x = 0.0;
-            position.x = block.x + width;
-            break;
-          }
+        if (velocity.x > 0.0 && position.x + hitbox.width > block.x) 
+        { // right
+          position.x = block.x - hitbox.width;
+          velocity.x = 0.0;
+        }
+        else if (velocity.x < 0.0 && position.x < block.x + block.width) 
+        { // left
+          position.x = block.x + block.width;
+          velocity.x = 0.0;
         }
       }
     }
   }
-  
-  //NEED TO FIX THIS BUG!!! The player is teleporting >:)
+  //NEED TO FIX THIS BUG!!! The player is teleporting >:(
   void _checkVerticalCollisions() 
   {
-    for(final block in collisionBlocks)
+    for (final block in collisionBlocks) 
     {
-      if(block.isWalls)
+      if (block.isWalls && checkCollision(this, block)) 
       {
-        if(checkCollision(this, block))
-        {
-          if(velocity.y > 0.0)
-          {
-            velocity.y = 0.0;
-            position.y = block.y - height;
-            break;
-          }
-          if(velocity.y < 0.0)
-          {
-            velocity.y = 0.0;
-            position.y = block.y + block.height;
-            break;
-          }
+        if (velocity.y > 0 && position.y + hitbox.height > block.y) 
+        { // down
+          position.y = block.y - hitbox.height;
+          velocity.y = 0.0;
+        } 
+        else if (velocity.y < 0 && position.y < block.y + block.height) 
+        { // up
+          position.y = block.y + block.height;
+          velocity.y = 0.0;
         }
       }
     }

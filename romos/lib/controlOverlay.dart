@@ -53,7 +53,7 @@ class GameControlsOverlay extends StatelessWidget
       style: TextButton.styleFrom
       (
         padding: EdgeInsets.zero, 
-        minimumSize: Size(64, 64), //Mинимальный размер кнопки
+        minimumSize: const Size(64, 64), //Mинимальный размер кнопки
       ),
       child: Image.asset(assetPath),
     );

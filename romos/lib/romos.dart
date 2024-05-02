@@ -25,7 +25,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.center;
     camera.follow(player);
-    camera.viewfinder.zoom = 2.5; //camera zoom
+    camera.viewfinder.zoom = 2.4; //camera zoom
 
     await add(camera);
     await add(world);
@@ -42,23 +42,4 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents
   {
     overlays.remove('controls');
   }
-
-  //Camera debug
-  // @override
-  // void render(Canvas canvas) 
-  // {
-  //   super.render(canvas); // Сначала рендерим все компоненты игры.
-  //   //Теперь рендерим рамку вьюпорта для отладки.
-  // final rectPaint = Paint()
-  //   ..color = Color(0xFFFF00FF) //Ярко-розовый цвет.
-  //   ..style = PaintingStyle.stroke //Рисуем только контур.
-  //   ..strokeWidth = 4.0; //Толщина линии.
-  // final viewportRect = Rect.fromLTWH(
-  //   0, //X координата левого верхнего угла.
-  //   0, //Y координата левого верхнего угла.
-  //   camera.viewport.size.x, //Ширина рамки равна ширине вьюпорта.
-  //   camera.viewport.size.y, //Высота рамки равна высоте вьюпорта.
-  // );
-  // canvas.drawRect(viewportRect, rectPaint);
-  // }
 }
