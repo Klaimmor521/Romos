@@ -6,7 +6,6 @@ import 'package:romos/player_hitbox.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
-import 'package:romos/player_hitbox.dart';
 
 enum PlayerStates
 {
@@ -53,8 +52,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   void update(double dt) 
   {
     _updatePlayerMovement(dt);
-    _checkHorizontalCollisions();
-    _checkVerticalCollisions();
+    // _checkHorizontalCollisions();
+    // _checkVerticalCollisions();
     super.update(dt);
   }
 
@@ -160,14 +159,14 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     {
       if (block.isWalls && checkCollision(this, block)) 
       {
-        if (velocity.x > 0.0 && position.x + hitbox.width > block.x) 
+        if (velocity.x > 0.0) 
         { // right
-          position.x = block.x - hitbox.width;
+          position.x = block.x - (hitbox.offsetX + hitbox.width);
           velocity.x = 0.0;
         }
-        else if (velocity.x < 0.0 && position.x < block.x + block.width) 
+        else if (velocity.x < 0.0) 
         { // left
-          position.x = block.x + block.width;
+          position.x = block.x + block.width - hitbox.offsetX;
           velocity.x = 0.0;
         }
       }
@@ -180,14 +179,14 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     {
       if (block.isWalls && checkCollision(this, block)) 
       {
-        if (velocity.y > 0 && position.y + hitbox.height > block.y) 
+        if (velocity.y > 0.0) 
         { // down
-          position.y = block.y - hitbox.height;
+          position.y = block.y - (hitbox.offsetY + hitbox.height);
           velocity.y = 0.0;
         } 
-        else if (velocity.y < 0 && position.y < block.y + block.height) 
+        else if (velocity.y < 0.0) 
         { // up
-          position.y = block.y + block.height;
+          position.y = block.y + block.height - hitbox.offsetY;
           velocity.y = 0.0;
         }
       }

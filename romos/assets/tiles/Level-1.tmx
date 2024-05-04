@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="47">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="63">
  <tileset firstgid="1" source="Main tileset.tsx"/>
  <layer id="1" name="Floor" width="40" height="30">
   <data encoding="csv">
@@ -35,9 +35,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="4" name="Spawnpoint" class="Player" offsetx="0.333333" offsety="0.666667">
-  <object id="2" name="Player" type="Player" x="1280" y="959.333" width="64" height="64"/>
- </objectgroup>
  <objectgroup id="5" name="Collisions" class="Walls">
   <object id="3" type="Walls" x="0" y="0" width="2560" height="128"/>
   <object id="4" type="Walls" x="0" y="1856" width="2560" height="64"/>
@@ -112,4 +109,23 @@
 14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,2147483662
 </data>
  </layer>
+ <objectgroup id="4" name="Spawnpoint" class="Player">
+  <object id="2" name="Player" type="Player" x="1280" y="959.333" width="64" height="64"/>
+  <object id="47" name="Stone" type="Stone" x="1616" y="720" width="32" height="32"/>
+  <object id="48" name="Earth mineral" type="Stone" x="2192" y="208" width="32" height="32"/>
+  <object id="49" name="Stone" type="Stone" x="1600" y="288" width="32" height="32"/>
+  <object id="50" name="Stone" type="Stone" x="1952" y="688" width="32" height="32"/>
+  <object id="51" name="Stone" type="Stone" x="2304" y="944" width="32" height="32"/>
+  <object id="52" name="Stone" type="Stone" x="1536" y="1696" width="32" height="32"/>
+  <object id="53" name="Stone" type="Stone" x="1712" y="1312" width="32" height="32"/>
+  <object id="54" name="Stone" type="Stone" x="2064" y="1360" width="32" height="32"/>
+  <object id="55" name="Earth mineral" type="Stone" x="2256" y="1552" width="32" height="32"/>
+  <object id="56" name="Earth mineral" type="Stone" x="336" y="1296" width="32" height="32"/>
+  <object id="57" name="Earth mineral" type="Stone" x="208" y="272" width="32" height="32"/>
+  <object id="58" name="Stone" type="Stone" x="896" y="800" width="32" height="32"/>
+  <object id="59" name="Stone" type="Stone" x="1168" y="272" width="32" height="32"/>
+  <object id="60" name="Stone" type="Stone" x="336" y="704" width="32" height="32"/>
+  <object id="61" name="Stone" type="Stone" x="976" y="1408" width="32" height="32"/>
+  <object id="62" name="Stone" type="Stone" x="432" y="1728" width="32" height="32"/>
+ </objectgroup>
 </map>
