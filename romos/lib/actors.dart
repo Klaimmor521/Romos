@@ -2,10 +2,13 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 import 'package:romos/player_hitbox.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
+
+var logger = Logger();
 
 enum PlayerStates
 {
@@ -17,7 +20,7 @@ enum PlayerDirection
   left, right, up, down, none
 }
 
-class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler
+class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler, HasCollisionDetection
 {
   String character;
   Player({position, this.character = 'Ghost'}) : super(position: position);
@@ -52,8 +55,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   void update(double dt) 
   {
     _updatePlayerMovement(dt);
-    // _checkHorizontalCollisions();
-    // _checkVerticalCollisions();
+    _checkHorizontalCollisions();
+    _checkVerticalCollisions();
     super.update(dt);
   }
 
@@ -162,11 +165,13 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
         if (velocity.x > 0.0) 
         { // right
           position.x = block.x - (hitbox.offsetX + hitbox.width);
+          //logger.d('Right: $position');
           velocity.x = 0.0;
         }
         else if (velocity.x < 0.0) 
         { // left
           position.x = block.x + block.width - hitbox.offsetX;
+          //logger.d('Left: $position');
           velocity.x = 0.0;
         }
       }
@@ -182,11 +187,13 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
         if (velocity.y > 0.0) 
         { // down
           position.y = block.y - (hitbox.offsetY + hitbox.height);
+          //logger.d('Down: $position');
           velocity.y = 0.0;
         } 
         else if (velocity.y < 0.0) 
         { // up
           position.y = block.y + block.height - hitbox.offsetY;
+          //logger.d('Up: $position');
           velocity.y = 0.0;
         }
       }

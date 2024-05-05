@@ -13,9 +13,9 @@ bool checkCollision(player, block)
 
   return 
   (
-    playerY < blockWidth + blockHeight && 
-    playerY + playerHeight > blockY &&
     playerX < blockX + blockWidth &&
-    playerX + playerWidth > blockX
+    playerX + playerWidth > blockX &&
+    playerY < blockY + blockHeight &&
+    playerY + playerHeight > blockY
   );
 }
