@@ -36,7 +36,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   double moveSpeed = 250;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
-  PlayerHitBox hitbox = PlayerHitBox(offsetX: 10, offsetY: 4, width: 10, height: 10);
+  PlayerHitBox hitbox = PlayerHitBox(offsetX: 8, offsetY: 6, width: 45, height: 47);
 
   @override
   FutureOr<void> onLoad()
@@ -154,8 +154,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     velocity = Vector2(directionX, directionY);
     position += velocity * dt;
   }
-  
-  //NEED TO FIX THIS BUG!!!
+
   void _checkHorizontalCollisions() 
   {
     for (final block in collisionBlocks) 
@@ -177,7 +176,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
       }
     }
   }
-  //NEED TO FIX THIS BUG!!! The player is teleporting >:(
+
   void _checkVerticalCollisions() 
   {
     for (final block in collisionBlocks) 
