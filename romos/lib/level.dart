@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:romos/actors.dart';
+import 'package:romos/player.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/stone.dart';
 
@@ -16,8 +16,9 @@ class Level extends World
   @override
   FutureOr<void> onLoad() async
   {
+    priority = -1;
     level = await TiledComponent.load('$levelName.tmx', Vector2.all(64));
-    //Debug for vectorф
+    //Debug for vector
     //level.debugMode = true; 
     add(level);
 

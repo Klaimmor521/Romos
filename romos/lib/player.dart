@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
-import 'package:romos/player_hitbox.dart';
+import 'package:romos/custom_hitbox.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
+import 'package:romos/stone.dart';
 
 var logger = Logger();
 
@@ -20,7 +22,7 @@ enum PlayerDirection
   left, right, up, down, none
 }
 
-class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler, HasCollisionDetection
+class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler, CollisionCallbacks
 {
   String character;
   Player({position, this.character = 'Ghost'}) : super(position: position);
@@ -36,11 +38,12 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   double moveSpeed = 250;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
-  PlayerHitBox hitbox = PlayerHitBox(offsetX: 8, offsetY: 6, width: 45, height: 47);
+  CustomHitbox hitbox = CustomHitbox(offsetX: 10, offsetY: 6, width: 42, height: 47);
 
   @override
   FutureOr<void> onLoad()
   {
+    priority = 1;
     _loadAllAnimations();
     debugMode = true;
     add(RectangleHitbox(
@@ -92,6 +95,16 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     return super.onKeyEvent(event, keysPressed);
   }
   
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) 
+  {
+    if(other is Stone)
+    {
+      other.collidingWithPlayer();
+    }
+    super.onCollision(intersectionPoints, other);
+  }
+
   void _loadAllAnimations() 
   {
     idleAnimation = _spriteAnimation('Ghost idle', 5);
@@ -163,15 +176,17 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
       {
         if (velocity.x > 0.0) 
         { // right
-          position.x = block.x - (hitbox.offsetX + hitbox.width);
-          //logger.d('Right: $position');
           velocity.x = 0.0;
+          position.x = block.x - hitbox.offsetX - hitbox.width;
+          //logger.d('Right: $position');
+          break;
         }
         else if (velocity.x < 0.0) 
         { // left
+          velocity.x = 0.0;
           position.x = block.x + block.width - hitbox.offsetX;
           //logger.d('Left: $position');
-          velocity.x = 0.0;
+          break;
         }
       }
     }
@@ -185,15 +200,17 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
       {
         if (velocity.y > 0.0) 
         { // down
-          position.y = block.y - (hitbox.offsetY + hitbox.height);
-          //logger.d('Down: $position');
           velocity.y = 0.0;
+          position.y = block.y - hitbox.height - hitbox.offsetY;
+          //logger.d('Down: $position');
+          break;
         } 
         else if (velocity.y < 0.0) 
         { // up
+          velocity.y = 0.0;
           position.y = block.y + block.height - hitbox.offsetY;
           //logger.d('Up: $position');
-          velocity.y = 0.0;
+          break;
         }
       }
     }

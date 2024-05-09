@@ -13,11 +13,11 @@
                 4,
                 5
             ],
-            "scale": 0.33,
-            "selectedLayer": 3,
+            "scale": 0.25,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1354.5454545454543,
-                "y": 984.8484848484849
+                "x": 1216,
+                "y": 608
             }
         },
         "Level-2.tmx": {

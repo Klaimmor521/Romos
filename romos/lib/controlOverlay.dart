@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:romos/actors.dart';
+import 'package:romos/player.dart';
 import 'package:romos/romos.dart';
 
 class GameControlsOverlay extends StatelessWidget 

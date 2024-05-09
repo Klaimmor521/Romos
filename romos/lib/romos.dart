@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:romos/actors.dart';
+import 'package:romos/player.dart';
 import 'package:romos/level.dart';
 import 'package:flutter/widgets.dart';
 
-class Romos extends FlameGame with HasKeyboardHandlerComponents
+class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDetection
 {
   @override
   Color backgroundColor() => const Color.fromARGB(255, 36, 36, 36);
