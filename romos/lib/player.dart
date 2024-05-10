@@ -2,15 +2,14 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:logger/logger.dart';
+//import 'package:logger/logger.dart';
 import 'package:romos/custom_hitbox.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
 import 'package:romos/stone.dart';
 
-var logger = Logger();
+//var logger = Logger();
 
 enum PlayerStates
 {
@@ -36,6 +35,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
 
   PlayerDirection playerDirection = PlayerDirection.down;
   double moveSpeed = 250;
+  int count = 0; //Picked up stones
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(offsetX: 10, offsetY: 6, width: 42, height: 47);
@@ -101,11 +101,16 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     if(other is Stone)
     {
       other.collidingWithPlayer();
+      count++;
+      if(count == 16)
+      {
+        print('You collected 16 stones! The next level waiting you!');
+      }
     }
     super.onCollision(intersectionPoints, other);
   }
 
-  void _loadAllAnimations() 
+  void _loadAllAnimations()
   {
     idleAnimation = _spriteAnimation('Ghost idle', 5);
     upAnimation = _spriteAnimation('Ghost walk up', 5);

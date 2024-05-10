@@ -20,7 +20,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     await images.loadAllImages();
 
-    final world = Level(levelName: 'Level-1', player: player);
+    final world = Level(levelName: 'Level-2', player: player);
 
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.center;

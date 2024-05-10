@@ -7,7 +7,6 @@ import 'package:romos/romos.dart';
 class Stone extends SpriteComponent with HasGameRef<Romos>
 {
   final String stone;
-  int count = 0;
   Stone({this.stone = 'Stone', position, size}) : super(position: position, size: size);
 
   final hitbox = CustomHitbox(offsetX: 7, offsetY: 10, width: 34, height: 34);
@@ -29,7 +28,6 @@ class Stone extends SpriteComponent with HasGameRef<Romos>
   void collidingWithPlayer()
   {
     removeFromParent();
-    count++;
     print('You picked a stone');
   }
 }
