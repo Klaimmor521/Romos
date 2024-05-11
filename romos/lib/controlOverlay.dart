@@ -5,6 +5,10 @@ import 'package:romos/romos.dart';
 class GameControlsOverlay extends StatelessWidget 
 {
   final Romos gameRef;
+  String up = 'assets/images/HUD/ButtonUp.png';
+  String down = 'assets/images/HUD/ButtonDown.png';
+  String left = 'assets/images/HUD/ButtonLeft.png';
+  String right = 'assets/images/HUD/ButtonRight.png';
 
   GameControlsOverlay({required this.gameRef});
 
@@ -23,7 +27,7 @@ class GameControlsOverlay extends StatelessWidget
           children: <Widget>
           [
             //Кнопка "вверх" выше всех
-            button('assets/images/HUD/ButtonUp.png', () => gameRef.player.playerDirection = PlayerDirection.up),
+            button(up, () => gameRef.player.playerDirection = PlayerDirection.up),
             //const SizedBox(height: 0),
             //Горизонтальное расположение кнопок влево и вправо
             Row
@@ -31,14 +35,14 @@ class GameControlsOverlay extends StatelessWidget
               mainAxisSize: MainAxisSize.min,
               children: <Widget>
               [
-                button('assets/images/HUD/ButtonLeft.png', () => gameRef.player.playerDirection = PlayerDirection.left),
+                button(left, () => gameRef.player.playerDirection = PlayerDirection.left),
                 const SizedBox(width: 10), //Отступ между кнопками
-                button('assets/images/HUD/ButtonRight.png', () => gameRef.player.playerDirection = PlayerDirection.right),
+                button(right, () => gameRef.player.playerDirection = PlayerDirection.right),
               ],
             ),
             //const SizedBox(height: 0),
             //Кнопка вниз ниже всех
-            button('assets/images/HUD/ButtonDown.png', () => gameRef.player.playerDirection = PlayerDirection.down),
+            button(down, () => gameRef.player.playerDirection = PlayerDirection.down),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 //import 'package:logger/logger.dart';
 import 'package:romos/custom_hitbox.dart';
 import 'package:romos/romos.dart';
@@ -33,7 +34,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   late final SpriteAnimation downAnimation;
   final double stepTime = 0.2;
 
-  PlayerDirection playerDirection = PlayerDirection.down;
+  PlayerDirection playerDirection = PlayerDirection.right;
   double moveSpeed = 250;
   int count = 0; //Picked up stones
   Vector2 velocity = Vector2.zero();
@@ -102,9 +103,13 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     {
       other.collidingWithPlayer();
       count++;
-      if(count == 16)
+      if(count == 1)
       {
-        print('You collected 16 stones! The next level waiting you!');
+        const waitToChangeDuration = Duration(seconds: 3);
+        Future.delayed(waitToChangeDuration, () 
+        {
+          game.loadNextLevel();
+        });
       }
     }
     super.onCollision(intersectionPoints, other);

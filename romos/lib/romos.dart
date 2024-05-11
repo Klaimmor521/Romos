@@ -12,23 +12,17 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   @override
   Color backgroundColor() => const Color.fromARGB(255, 36, 36, 36);
   @override
-  late final CameraComponent camera = CameraComponent();
+  late CameraComponent camera = CameraComponent();
   Player player = Player(character: 'Ghost');
+  List<String> levelNames = ['Level-1','Level-2'];
+  int currentLevelIndex = 0;
 
   @override
   Future<void> onLoad() async
   {
     await images.loadAllImages();
 
-    final world = Level(levelName: 'Level-2', player: player);
-
-    final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
-    camera.viewfinder.anchor = Anchor.center;
-    camera.follow(player);
-    camera.viewfinder.zoom = 2.4; //camera zoom
-
-    await add(camera);
-    await add(world);
+    _loadLevel();
     showControls();
     
     return super.onLoad();
@@ -41,5 +35,33 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   void hideControls() 
   {
     overlays.remove('controls');
+  }
+
+  void loadNextLevel()
+  {
+    if(currentLevelIndex < levelNames.length - 1)
+    {
+      currentLevelIndex++;
+      _loadLevel();
+    }
+    else
+    {
+      // other levels or other stuff
+    }
+  }
+  
+  void _loadLevel() async
+  {
+    Future.delayed(const Duration(seconds: 1), () 
+    {
+    Level world = Level(levelName: levelNames[currentLevelIndex], player: player);
+
+    final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
+    camera.viewfinder.anchor = Anchor.center;
+    camera.follow(player);
+    camera.viewfinder.zoom = 2.4; //camera zoom
+
+    addAll([camera, world]);
+    });
   }
 }

@@ -16,20 +16,20 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1284,
-                "y": 744
+                "x": 1278,
+                "y": 962
             }
         },
         "Level-2.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 0.25,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1652,
-                "y": 548
+                "x": 1648,
+                "y": 544
             }
         },
         "Main tileset.tsx": {

@@ -28,6 +28,6 @@ class Stone extends SpriteComponent with HasGameRef<Romos>
   void collidingWithPlayer()
   {
     removeFromParent();
-    print('You picked a stone');
+    //print('You picked a stone');
   }
 }
