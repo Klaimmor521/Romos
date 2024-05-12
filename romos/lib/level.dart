@@ -4,6 +4,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:romos/player.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/stone.dart';
+import 'package:romos/keeper.dart';
 
 class Level extends World
 {
@@ -44,6 +45,9 @@ class Level extends World
           case 'Stone':
             final stone = Stone(stone: spawnPoint.name, position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height));
             add(stone);
+          case 'Keeper':
+            final keeper = Keeper(position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height));
+            add(keeper);
           default:
         }
       }

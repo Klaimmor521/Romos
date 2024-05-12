@@ -5,12 +5,12 @@ import 'package:romos/romos.dart';
 class GameControlsOverlay extends StatelessWidget 
 {
   final Romos gameRef;
-  String up = 'assets/images/HUD/ButtonUp.png';
-  String down = 'assets/images/HUD/ButtonDown.png';
-  String left = 'assets/images/HUD/ButtonLeft.png';
-  String right = 'assets/images/HUD/ButtonRight.png';
+  final String up = 'assets/images/HUD/ButtonUp.png';
+  final String down = 'assets/images/HUD/ButtonDown.png';
+  final String left = 'assets/images/HUD/ButtonLeft.png';
+  final String right = 'assets/images/HUD/ButtonRight.png';
 
-  GameControlsOverlay({required this.gameRef});
+  const GameControlsOverlay({super.key, required this.gameRef});
 
   @override
  Widget build(BuildContext context) 

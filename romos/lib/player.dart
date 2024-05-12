@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 //import 'package:logger/logger.dart';
 import 'package:romos/custom_hitbox.dart';
 import 'package:romos/romos.dart';
@@ -25,7 +24,7 @@ enum PlayerDirection
 class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, KeyboardHandler, CollisionCallbacks
 {
   String character;
-  Player({position, this.character = 'Ghost'}) : super(position: position);
+  Player({super.position, this.character = 'Ghost'});
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation upAnimation;

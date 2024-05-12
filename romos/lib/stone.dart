@@ -7,14 +7,14 @@ import 'package:romos/romos.dart';
 class Stone extends SpriteComponent with HasGameRef<Romos>
 {
   final String stone;
-  Stone({this.stone = 'Stone', position, size}) : super(position: position, size: size);
+  Stone({this.stone = 'Stone', super.position, super.size});
 
   final hitbox = CustomHitbox(offsetX: 7, offsetY: 10, width: 34, height: 34);
 
   @override
   FutureOr<void> onLoad() async
   {
-    debugMode = true;
+    //debugMode = true;
     add(RectangleHitbox(position: Vector2(hitbox.offsetX, hitbox.offsetY), size: Vector2(hitbox.width, hitbox.height), collisionType: CollisionType.passive));
     priority = 0;
     sprite = await Sprite.load("Items/$stone.png");

@@ -2,7 +2,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:romos/controlOverlay.dart';
+import 'package:romos/control_overlay.dart';
 import 'package:romos/romos.dart';
 
 void main() async 
