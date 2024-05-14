@@ -36,6 +36,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   PlayerDirection playerDirection = PlayerDirection.right;
   double moveSpeed = 250;
   int count = 0; //Picked up stones
+  int stones = 16;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(offsetX: 10, offsetY: 6, width: 42, height: 47);
@@ -46,11 +47,11 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     priority = 1;
     _loadAllAnimations();
     debugMode = true;
+    scale = Vector2.all(1.5); //Sprite scale
     add(RectangleHitbox(
       position: Vector2(hitbox.offsetX, hitbox.offsetY),
       size: Vector2(hitbox.width, hitbox.height),
     ));
-    scale = Vector2.all(1.5); //Sprite scale
     return super.onLoad();
   }
 
@@ -102,9 +103,9 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     {
       other.collidingWithPlayer();
       count++;
-      if(count == 1)
+      if(count == stones)
       {
-        const waitToChangeDuration = Duration(seconds: 3);
+        const waitToChangeDuration = Duration(seconds: 2);
         Future.delayed(waitToChangeDuration, () 
         {
           game.loadNextLevel();
