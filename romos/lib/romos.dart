@@ -6,7 +6,6 @@ import 'package:flame/input.dart';
 import 'package:romos/player.dart';
 import 'package:romos/level.dart';
 import 'package:flutter/widgets.dart';
-import 'package:romos/keeper.dart';
 
 class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDetection
 {
@@ -15,7 +14,6 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   @override
   late CameraComponent camera = CameraComponent();
   Player player = Player(character: 'Ghost');
-  //Keeper keeper = Keeper();
   List<String> levelNames = ['Level-1','Level-2'];
   int currentLevelIndex = 0;
 
@@ -61,7 +59,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
     camera.viewfinder.anchor = Anchor.center;
     camera.follow(player);
-    //camera.viewfinder.zoom = 2.4; //camera zoom
+    camera.viewfinder.zoom = 2.4; //camera zoom
 
     addAll([camera, world]);
     });
