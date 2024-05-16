@@ -19,8 +19,6 @@ class Level extends World
   {
     priority = -1;
     level = await TiledComponent.load('$levelName.tmx', Vector2.all(64));
-    //Debug for vector
-    //level.debugMode = true; 
     add(level);
 
     _spawningObjects();

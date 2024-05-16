@@ -20,8 +20,8 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   final textureSize = Vector2.all(64);
   Vector2 velocity = Vector2.zero();
   Direction direction = Direction.left;
-  static const moveSpeed = 50;
-  static const detectionRadius = 250;
+  static const moveSpeed = 70.0;
+  static const detectionRadius = 300;
   late final Player player;
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(offsetX: 15, offsetY: 10, width: 47, height: 69);
@@ -37,18 +37,18 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   {
     priority = 1;
     debugMode = true;
+    _loadAllAnimations();
     scale = Vector2.all(1.6);
     player = game.player;
 
     add(
-      RectangleHitbox(
+      RectangleHitbox
+      (
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
         size: Vector2(hitbox.width, hitbox.height),
-        collisionType: CollisionType.passive
       ),
     );
 
-    _loadAllAnimations();
     return super.onLoad();
   }
 
@@ -83,35 +83,77 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
 
   SpriteAnimation _spriteAnimation(String state, int amount)
   {
-    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/Earth keeper/Earth keeper $state.png'), 
+    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/Keeper/Earth keeper $state.png'), 
     SpriteAnimationData.sequenced(amount: amount, stepTime: stepTime, textureSize: textureSize));
   }
 
   void _updateState(double dt) 
   {
-    Vector2 target = player.absolutePosition - absolutePosition; //playerPosition - keeperPosition
-    double distance = sqrt(pow(target.x, 2) + pow(target.y, 2));
+    Vector2 target = player.absolutePosition - absolutePosition;
+    double distance = target.length;
     if(distance <= detectionRadius)
     {
-      switch(direction)
+      if(target.x.abs() > target.y.abs())
       {
-        case Direction.down:
-          current = State.down;
-          target.y += moveSpeed;
-        case Direction.up:
-          current = State.up;
-          target.y -= moveSpeed;
-        case Direction.left:
-          current = State.left;
-          target.x -= moveSpeed;
-        case Direction.right:
+        if(target.x > 0)
+        {
           current = State.right;
-          target.x += moveSpeed;
-        default:
-          current = State.idle;
+          direction = Direction.right;
+        }
+        else
+        {
+          current = State.left;
+          direction = Direction.left;
+        }
       }
-      velocity = Vector2(target.x, target.y);
+      else
+      {
+        if(target.y > 0)
+        {
+          current = State.down;
+          direction = Direction.down;
+        }
+        else
+        {
+          current = State.up;
+          direction = Direction.up;
+        }
+      }
+      velocity = target.normalized() * moveSpeed;
       position += velocity * dt;
+      //switch(direction)
+      // {
+      //   case Direction.down:
+      //     current = State.down;
+      //     //target.y += moveSpeed * dt;
+      //     break;
+      //   case Direction.up:
+      //     current = State.up;
+      //     //target.y -= moveSpeed * dt;
+      //     break;
+      //   case Direction.left:
+      //     current = State.left;
+      //     //target.x -= moveSpeed * dt;
+      //     break;
+      //   case Direction.right:
+      //     current = State.right;
+      //     //target.x += moveSpeed * dt;
+      //     break;
+      //   case Direction.none:
+      //     current = State.idle;
+      //     velocity = Vector2.zero();
+      //     break;
+      //   default:
+      //     current = State.idle;
+      // }
+      // //velocity = Vector2(target.x, target.y);
+      // position += velocity * dt;
+    }
+    else
+    {
+      current = State.idle;
+      direction = Direction.right;
+      velocity = Vector2.zero();
     }
   }
   

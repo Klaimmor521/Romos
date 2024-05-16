@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-//import 'package:logger/logger.dart';
 import 'package:romos/custom_hitbox.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
 import 'package:romos/stone.dart';
+//import 'package:logger/logger.dart';
 
 //var logger = Logger();
 
@@ -36,7 +36,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   PlayerDirection playerDirection = PlayerDirection.right;
   double moveSpeed = 250;
   int collectedStones = 0;
-  int totalStones = 16;
+  int totalStones = 1;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(offsetX: 10, offsetY: 6, width: 42, height: 47);
@@ -48,10 +48,13 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     _loadAllAnimations();
     debugMode = true;
     scale = Vector2.all(1.5); //Sprite scale
-    add(RectangleHitbox(
-      position: Vector2(hitbox.offsetX, hitbox.offsetY),
-      size: Vector2(hitbox.width, hitbox.height),
-    ));
+    add(
+      RectangleHitbox
+      (
+        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        size: Vector2(hitbox.width, hitbox.height),
+      ),
+    );
     return super.onLoad();
   }
 

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Level-1.tmx",
+    "activeFile": "Level-2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -16,8 +16,8 @@
             "scale": 0.25,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1180,
-                "y": 552
+                "x": 1488,
+                "y": 632
             }
         },
         "Level-2.tmx": {
@@ -25,11 +25,11 @@
                 3,
                 4
             ],
-            "scale": 0.25,
+            "scale": 0.33,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1644,
-                "y": 540
+                "x": 1551.5151515151513,
+                "y": 948.4848484848485
             }
         },
         "Main tileset.tsx": {
@@ -92,8 +92,8 @@
     "project": "romos.tiled-project",
     "property.type": "float",
     "recentFiles": [
-        "Level-2.tmx",
         "Level-1.tmx",
+        "Level-2.tmx",
         "Mars Tileset.tsx",
         "Main tileset.tsx",
         "walls.tsx",

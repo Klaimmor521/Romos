@@ -71,8 +71,7 @@ flutter:
       - assets/tiles/Main tileset.tsx
       - assets/tiles/Mars Tileset.tsx
       - assets/images/Characters/Animations/Ghost/
-      - assets/images/Characters/Animations/Earth keeper/
-      - assets/images/Characters/Animations/Mars keeper/
+      - assets/images/Characters/Animations/Keeper/
       - assets/images/HUD/
       - assets/images/Items/Stone.png
       - assets/images/Items/Earth mineral.png
