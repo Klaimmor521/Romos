@@ -3,6 +3,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:romos/custom_hitbox.dart';
+import 'package:romos/keeper.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
@@ -114,6 +115,10 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
           game.loadNextLevel();
         });
       }
+    }
+    if(other is Keeper)
+    {
+      gameRef.resetLevel();
     }
     super.onCollision(intersectionPoints, other);
   }

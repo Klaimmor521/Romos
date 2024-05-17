@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:romos/collision_block.dart';
@@ -14,7 +13,8 @@ enum Direction {left, right, up, down, none}
 
 class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, CollisionCallbacks
 {
-  Keeper({super.position, super.size});
+  final String type;
+  Keeper({super.position, super.size, this.type = 'Earth keeper'});
 
   static const stepTime = 0.2;
   final textureSize = Vector2.all(64);
@@ -83,11 +83,11 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
 
   SpriteAnimation _spriteAnimation(String state, int amount)
   {
-    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/Keeper/Earth keeper $state.png'), 
+    return SpriteAnimation.fromFrameData(game.images.fromCache('Characters/Animations/Keeper/$type $state.png'), 
     SpriteAnimationData.sequenced(amount: amount, stepTime: stepTime, textureSize: textureSize));
   }
 
-  void _updateState(double dt) 
+  void _updateState(double dt)
   {
     Vector2 target = player.absolutePosition - absolutePosition;
     double distance = target.length;
@@ -164,13 +164,13 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
       if (block.isWalls && checkCollision(this, block))
       {
         if (velocity.x > 0.0) 
-        { // right
+        { //right
           velocity.x = 0.0;
           position.x = block.x - hitbox.offsetX - hitbox.width;
           break;
         }
         else if (velocity.x < 0.0) 
-        { // left
+        { //left
           velocity.x = 0.0;
           position.x = block.x + block.width - hitbox.offsetX;
           break;
@@ -186,13 +186,13 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
       if (block.isWalls && checkCollision(this, block)) 
       {
         if (velocity.y > 0.0) 
-        { // down
+        { //down
           velocity.y = 0.0;
           position.y = block.y - hitbox.height - hitbox.offsetY;
           break;
         } 
         else if (velocity.y < 0.0) 
-        { // up
+        { //up
           velocity.y = 0.0;
           position.y = block.y + block.height - hitbox.offsetY;
           break;

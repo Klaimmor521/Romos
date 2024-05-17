@@ -44,7 +44,8 @@ class Level extends World
             final stone = Stone(stone: spawnPoint.name, position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height));
             add(stone);
           case 'Keeper':
-            final keeper = Keeper(position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height));
+            String type = spawnPoint.name;
+            final keeper = Keeper(position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height), type: type);
             add(keeper);
           default:
         }
