@@ -7,6 +7,7 @@ import 'package:romos/keeper.dart';
 import 'package:romos/romos.dart';
 import 'package:romos/collision_block.dart';
 import 'package:romos/utils.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:romos/stone.dart';
 //import 'package:logger/logger.dart';
 
@@ -47,7 +48,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   {
     priority = 1;
     _loadAllAnimations();
-    debugMode = true;
+    //debugMode = true;
     scale = Vector2.all(1.5); //Sprite scale
     add(
       RectangleHitbox
@@ -118,6 +119,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     }
     if(other is Keeper)
     {
+      FlameAudio.play('I\'m gone.wav');
       gameRef.resetLevel();
     }
     super.onCollision(intersectionPoints, other);
