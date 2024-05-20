@@ -10,14 +10,14 @@
     "fileStates": {
         "Level-1.tmx": {
             "expandedObjectLayers": [
-                4,
-                5
+                5,
+                4
             ],
-            "scale": 0.25,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1480,
-                "y": 624
+                "x": 1352,
+                "y": 90.66666666666669
             }
         },
         "Level-2.tmx": {
@@ -26,10 +26,10 @@
                 4
             ],
             "scale": 0.33,
-            "selectedLayer": 3,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1381.8181818181818,
-                "y": 857.5757575757576
+                "x": 1187.878787878788,
+                "y": 472.72727272727275
             }
         },
         "Main tileset.tsx": {

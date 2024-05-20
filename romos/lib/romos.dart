@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:romos/player.dart';
 import 'package:romos/level.dart';
 import 'package:flutter/widgets.dart';
@@ -43,6 +44,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     {
       currentLevelIndex++;
       _loadLevel();
+      FlameAudio.play("Load level.wav");
     }
     else
     {
@@ -54,20 +56,21 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     Future.delayed(const Duration(seconds: 1), () 
     {
-    Level world = Level(levelName: levelNames[currentLevelIndex], player: player);
+      Level world = Level(levelName: levelNames[currentLevelIndex], player: player);
 
-    final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
-    camera.viewfinder.anchor = Anchor.center;
-    camera.follow(player);
-    camera.viewfinder.zoom = 2.4; //camera zoom
+      final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
+      camera.viewfinder.anchor = Anchor.center;
+      camera.follow(player);
+      camera.viewfinder.zoom = 2.4; //camera zoom
 
-    addAll([camera, world]);
+      addAll([camera, world]);
     });
   }
 
   void resetLevel()
   {
     removeAll(children.toList());
+    player.collectedStones = 0;
     loadLevel(currentLevelIndex);
   }
   

@@ -24,7 +24,7 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   static const detectionRadius = 300;
   late final Player player;
   List<CollisionBlock> collisionBlocks = [];
-  CustomHitbox hitbox = CustomHitbox(offsetX: 15, offsetY: 10, width: 47, height: 69);
+  CustomHitbox hitbox = CustomHitbox(offsetX: 20, offsetY: 10, width: 40, height: 69);
 
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _leftAnimation;
