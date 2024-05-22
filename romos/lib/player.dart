@@ -48,7 +48,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   {
     priority = 1;
     _loadAllAnimations();
-    debugMode = true;
+    //debugMode = true;
     scale = Vector2.all(1.5); //Sprite scale
     add(
       RectangleHitbox

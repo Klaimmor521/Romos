@@ -42,13 +42,15 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     if(currentLevelIndex < levelNames.length - 1)
     {
+      removeAll(children.toList());
+      player.collectedStones = 0;
       currentLevelIndex++;
       _loadLevel();
       FlameAudio.play("Load level.wav");
     }
     else
     {
-      // other levels or other stuff
+      //other levels or other stuff
     }
   }
   
