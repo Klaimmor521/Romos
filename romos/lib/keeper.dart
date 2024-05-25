@@ -36,7 +36,7 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   FutureOr<void> onLoad() 
   {
     priority = 1;
-    debugMode = true;
+    //debugMode = true;
     _loadAllAnimations();
     scale = Vector2.all(1.6);
     player = game.player;

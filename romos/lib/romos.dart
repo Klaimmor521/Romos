@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -50,7 +51,8 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     }
     else
     {
-      //other levels or other stuff
+      print('Level: $currentLevelIndex');
+      showEndGameDialog();
     }
   }
   
@@ -80,5 +82,23 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     currentLevelIndex = index;
     _loadLevel();
+  }
+
+  void resetGame() 
+  {
+    removeAll(children.toList());
+    player.collectedStones = 0;
+    currentLevelIndex = 0;
+    _loadLevel();
+  }
+
+  void exitGame() 
+  {
+    exit(0);
+  }
+
+  void showEndGameDialog()
+  {
+    overlays.add('EndGameMenu');
   }
 }

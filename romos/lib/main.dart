@@ -3,6 +3,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:romos/control_overlay.dart';
+import 'package:romos/endDialog.dart';
 import 'package:romos/romos.dart';
 
 void main() async 
@@ -24,6 +25,7 @@ void main() async
           overlayBuilderMap: 
           {
             'controls': (BuildContext context, Romos game) => GameControlsOverlay(gameRef: game),
+            'EndGameMenu': (BuildContext context, Romos game) => EndDialog(gameRef: game),
           },
           initialActiveOverlays: const ['controls']
         ),
