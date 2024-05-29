@@ -77,18 +77,20 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     loadLevel(currentLevelIndex);
   }
   
-  void loadLevel(int index) async
+  void loadLevel(int index)
   {
     currentLevelIndex = index;
-    await _loadLevel();
+    _loadLevel();
   }
 
-  void resetGame() 
+  void resetGame()
   {
+    FlameAudio.play('Restart game.wav');
     removeAll(children.toList());
     player.collectedStones = 0;
     currentLevelIndex = 0;
     loadLevel(currentLevelIndex);
+    hideEndGameDialog();
   }
 
   void exitGame() 
@@ -99,5 +101,9 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   void showEndGameDialog()
   {
     overlays.add('EndGameMenu');
+  }
+  void hideEndGameDialog()
+  {
+    overlays.remove('EndGameMenu');
   }
 }
