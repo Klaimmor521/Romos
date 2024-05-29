@@ -27,7 +27,7 @@ void main() async
             'controls': (BuildContext context, Romos game) => GameControlsOverlay(gameRef: game),
             'EndGameMenu': (BuildContext context, Romos game) => EndDialog(gameRef: game),
           },
-          initialActiveOverlays: const ['controls']
+          initialActiveOverlays: const ['controls', 'EndGameMenu']
         ),
       ),
     ),

@@ -13,8 +13,8 @@ class GameControlsOverlay extends StatelessWidget
   const GameControlsOverlay({super.key, required this.gameRef});
 
   @override
- Widget build(BuildContext context) 
- {
+  Widget build(BuildContext context)
+  {
     return Align
     (
       alignment: Alignment.bottomLeft,
@@ -26,7 +26,7 @@ class GameControlsOverlay extends StatelessWidget
           mainAxisSize: MainAxisSize.min,
           children: <Widget>
           [
-            //Кнопка "вверх" выше всех
+            //Кнопка вверх
             button(up, () => gameRef.player.playerDirection = PlayerDirection.up),
             //const SizedBox(height: 0),
             //Горизонтальное расположение кнопок влево и вправо

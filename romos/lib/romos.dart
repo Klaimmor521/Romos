@@ -24,7 +24,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     await images.loadAllImages();
 
-    _loadLevel();
+    await _loadLevel();
     showControls();
     
     return super.onLoad();
@@ -51,12 +51,11 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     }
     else
     {
-      print('Level: $currentLevelIndex');
       showEndGameDialog();
     }
   }
-  
-  void _loadLevel() async
+
+  Future<void> _loadLevel() async
   {
     Future.delayed(const Duration(seconds: 1), () 
     {
@@ -78,10 +77,10 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     loadLevel(currentLevelIndex);
   }
   
-  void loadLevel(int index) 
+  void loadLevel(int index) async
   {
     currentLevelIndex = index;
-    _loadLevel();
+    await _loadLevel();
   }
 
   void resetGame() 
@@ -89,7 +88,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     removeAll(children.toList());
     player.collectedStones = 0;
     currentLevelIndex = 0;
-    _loadLevel();
+    loadLevel(currentLevelIndex);
   }
 
   void exitGame() 
