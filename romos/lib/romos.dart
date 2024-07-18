@@ -25,7 +25,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     await images.loadAllImages();
 
     await _loadLevel();
-    showControls();
+    //showControls();
     
     return super.onLoad();
   }

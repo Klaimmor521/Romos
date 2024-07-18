@@ -20,7 +20,7 @@ class EndDialog extends StatelessWidget
         children: <Widget>
         [
           const Text("You have reached all levels! Impressive! What you wanna do next?", style: TextStyle(fontSize: 20, color: Colors.white)),
-          const SizedBox(width: 20, height: 20), //Добавляет пространство между текстом и первой кнопкой
+          const SizedBox(width: 20, height: 20), //Пространство между текстом и первой кнопкой
           ElevatedButton
           (
             style: ElevatedButton.styleFrom

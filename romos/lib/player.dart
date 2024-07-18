@@ -38,7 +38,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   PlayerDirection playerDirection = PlayerDirection.right;
   double moveSpeed = 250;
   int collectedStones = 0;
-  int totalStones = 2;
+  int totalStones = 16;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(offsetX: 10, offsetY: 6, width: 42, height: 47);
