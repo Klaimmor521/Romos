@@ -25,8 +25,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     await images.loadAllImages();
 
     await _loadLevel();
-    //showControls();
-    
+    showControls();
     return super.onLoad();
   }
 
@@ -44,7 +43,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
     if(currentLevelIndex < levelNames.length - 1)
     {
       removeAll(children.toList());
-      player.collectedStones = 0;
+      player.collectedStones.value = 0;
       currentLevelIndex++;
       _loadLevel();
       FlameAudio.play("Load level.wav");
@@ -64,7 +63,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
       final camera = CameraComponent.withFixedResolution(world: world, width: 2560, height: 1920);
       camera.viewfinder.anchor = Anchor.center;
       camera.follow(player);
-      camera.viewfinder.zoom = 2.4; //camera zoom
+      camera.viewfinder.zoom = 2.6; //camera zoom
 
       addAll([camera, world]);
     });
@@ -73,7 +72,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   void resetLevel()
   {
     removeAll(children.toList());
-    player.collectedStones = 0;
+    player.collectedStones.value = 0;
     loadLevel(currentLevelIndex);
   }
   
@@ -87,7 +86,7 @@ class Romos extends FlameGame with HasKeyboardHandlerComponents, HasCollisionDet
   {
     FlameAudio.play('Restart game.wav');
     removeAll(children.toList());
-    player.collectedStones = 0;
+    player.collectedStones.value = 0;
     currentLevelIndex = 0;
     loadLevel(currentLevelIndex);
     hideEndGameDialog();

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:romos/custom_hitbox.dart';
 import 'package:romos/keeper.dart';
 import 'package:romos/romos.dart';
@@ -37,7 +38,7 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
 
   PlayerDirection playerDirection = PlayerDirection.right;
   double moveSpeed = 250;
-  int collectedStones = 0;
+  final collectedStones = ValueNotifier<int>(0); // Стал не просто int, а изменяемым и инициализирован
   int totalStones = 16;
   Vector2 velocity = Vector2.zero();
   List<CollisionBlock> collisionBlocks = [];
@@ -107,8 +108,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
     if(other is Stone)
     {
       other.collidingWithPlayer();
-      collectedStones++;
-      if(collectedStones == totalStones)
+      collectedStones.value += 1; // По другому изменяем значение
+      if(collectedStones.value == totalStones)
       {
         const waitToChangeDuration = Duration(seconds: 2);
         Future.delayed(waitToChangeDuration, () 
