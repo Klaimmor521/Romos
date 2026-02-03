@@ -49,8 +49,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
   {
     priority = 1;
     _loadAllAnimations();
-    //debugMode = true;
-    scale = Vector2.all(1.5); //Sprite scale
+    // debugMode = true;
+    scale = Vector2.all(1.5); // Sprite scale
     add(
       RectangleHitbox
       (
@@ -198,15 +198,15 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
         if (velocity.x > 0.0)
         { // right
           velocity.x = 0.0;
-          position.x = block.x - hitbox.offsetX - hitbox.width;
-          //logger.d('Right: $position');
+          // Добавляем * scale.x
+          position.x = block.x - (hitbox.offsetX * scale.x) - (hitbox.width * scale.x) - 0.01;
           break;
         }
         else if (velocity.x < 0.0) 
         { // left
           velocity.x = 0.0;
-          position.x = block.x + block.width - hitbox.offsetX;
-          //logger.d('Left: $position');
+           // Добавляем * scale.x
+          position.x = block.x + block.width - (hitbox.offsetX * scale.x) + 0.01;
           break;
         }
       }
@@ -222,15 +222,15 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Keybo
         if (velocity.y > 0.0) 
         { // down
           velocity.y = 0.0;
-          position.y = block.y - hitbox.height - hitbox.offsetY;
-          //logger.d('Down: $position');
+          // Добавляем * scale.y
+          position.y = block.y - (hitbox.height * scale.y) - (hitbox.offsetY * scale.y) - 0.01;
           break;
         } 
         else if (velocity.y < 0.0) 
         { // up
           velocity.y = 0.0;
-          position.y = block.y + block.height - hitbox.offsetY;
-          //logger.d('Up: $position');
+          // Добавляем * scale.y
+          position.y = block.y + block.height - (hitbox.offsetY * scale.y) + 0.01;
           break;
         }
       }

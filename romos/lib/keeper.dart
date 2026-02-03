@@ -20,11 +20,11 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   final textureSize = Vector2.all(64);
   Vector2 velocity = Vector2.zero();
   Direction direction = Direction.left;
-  static const moveSpeed = 70.0;
-  static const detectionRadius = 300;
+  static const moveSpeed = 72.5;
+  static const detectionRadius = 385;
   late final Player player;
   List<CollisionBlock> collisionBlocks = [];
-  CustomHitbox hitbox = CustomHitbox(offsetX: 20, offsetY: 10, width: 40, height: 69);
+  CustomHitbox hitbox = CustomHitbox(offsetX: 20, offsetY: 60, width: 40, height: 19);
 
   late final SpriteAnimation _idleAnimation;
   late final SpriteAnimation _leftAnimation;
@@ -36,7 +36,7 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   FutureOr<void> onLoad() 
   {
     priority = 1;
-    //debugMode = true;
+    // debugMode = true;
     _loadAllAnimations();
     scale = Vector2.all(1.6);
     player = game.player;
@@ -55,9 +55,19 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
   @override
   void update(double dt) 
   {
+    // Золотое правило платформеров: Запретить двигаться по диагонали в момент проверки
+    // Двигаем по X -> Проверяем -> Двигаем по Y -> Проверяем
+
     _updateState(dt);
+
+    position.x += velocity.x * dt;
+
     _checkHorizontalCollisions();
+
+    position.y += velocity.y * dt;
+
     _checkVerticalCollisions();
+
     super.update(dt);
   }
   
@@ -120,34 +130,6 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
         }
       }
       velocity = target.normalized() * moveSpeed;
-      position += velocity * dt;
-      //switch(direction)
-      // {
-      //   case Direction.down:
-      //     current = State.down;
-      //     //target.y += moveSpeed * dt;
-      //     break;
-      //   case Direction.up:
-      //     current = State.up;
-      //     //target.y -= moveSpeed * dt;
-      //     break;
-      //   case Direction.left:
-      //     current = State.left;
-      //     //target.x -= moveSpeed * dt;
-      //     break;
-      //   case Direction.right:
-      //     current = State.right;
-      //     //target.x += moveSpeed * dt;
-      //     break;
-      //   case Direction.none:
-      //     current = State.idle;
-      //     velocity = Vector2.zero();
-      //     break;
-      //   default:
-      //     current = State.idle;
-      // }
-      // //velocity = Vector2(target.x, target.y);
-      // position += velocity * dt;
     }
     else
     {
@@ -164,15 +146,17 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
       if (block.isWalls && checkCollision(this, block))
       {
         if (velocity.x > 0.0) 
-        { //right
+        { // right
           velocity.x = 0.0;
-          position.x = block.x - hitbox.offsetX - hitbox.width;
+          // Добавляем * scale.x
+          position.x = block.x - (hitbox.offsetX * scale.x) - (hitbox.width * scale.x) - 0.01;
           break;
         }
         else if (velocity.x < 0.0) 
-        { //left
+        { // left
           velocity.x = 0.0;
-          position.x = block.x + block.width - hitbox.offsetX;
+          // Добавляем * scale.x
+          position.x = block.x + block.width - (hitbox.offsetX * scale.x) + 0.01;
           break;
         }
       }
@@ -186,15 +170,17 @@ class Keeper extends SpriteAnimationGroupComponent with HasGameRef<Romos>, Colli
       if (block.isWalls && checkCollision(this, block)) 
       {
         if (velocity.y > 0.0) 
-        { //down
+        { // down
           velocity.y = 0.0;
-          position.y = block.y - hitbox.height - hitbox.offsetY;
+          // Добавляем * scale.y
+          position.y = block.y - (hitbox.height * scale.y) - (hitbox.offsetY * scale.y) - 0.01;
           break;
         } 
         else if (velocity.y < 0.0) 
-        { //up
+        { // up
           velocity.y = 0.0;
-          position.y = block.y + block.height - hitbox.offsetY;
+          // Добавляем * scale.y
+          position.y = block.y + block.height - (hitbox.offsetY * scale.y) + 0.01;
           break;
         }
       }

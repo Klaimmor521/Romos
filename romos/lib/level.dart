@@ -21,8 +21,8 @@ class Level extends World
     level = await TiledComponent.load('$levelName.tmx', Vector2.all(64));
     add(level);
 
-    _spawningObjects();
-    _addCollisions();
+    _addCollisions(); // Сначала создание стен
+    _spawningObjects(); // Потом создание объектов
 
     return super.onLoad();
   }
@@ -43,10 +43,13 @@ class Level extends World
           case 'Stone':
             final stone = Stone(stone: spawnPoint.name, position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height));
             add(stone);
+            break;
           case 'Keeper':
             String type = spawnPoint.name;
             final keeper = Keeper(position: Vector2(spawnPoint.x, spawnPoint.y), size: Vector2(spawnPoint.width, spawnPoint.height), type: type);
+            keeper.collisionBlocks = collisionBlocks; // Передаём стены Keeper
             add(keeper);
+            break;
           default:
         }
       }
